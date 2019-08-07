@@ -40,7 +40,7 @@ def fbnc_dp2(n):
     return tmp2
 
 
-print("fbnc get result:", fbnc(15), ",time take:", timeit.timeit("fbnc(15)", setup="from __main__ import fbnc", number=1000))
+print("fbnc result:", fbnc(15), ",time take:", timeit.timeit("fbnc(15)", setup="from __main__ import fbnc", number=1000))
 print("fbnc_dp0 result:", fbnc_dp0(15), ",time take:", timeit.timeit("fbnc_dp0(15)", setup="from __main__ import fbnc_dp0", number=1000))
 print("fbnc_dp1 result:", fbnc_dp1(15), ",time take:", timeit.timeit("fbnc_dp1(15)", setup="from __main__ import fbnc_dp1", number=1000))
 print("fbnc_dp2 result:", fbnc_dp2(15), ",time take:", timeit.timeit("fbnc_dp2(15)", setup="from __main__ import fbnc_dp2", number=1000))
