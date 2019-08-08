@@ -10,15 +10,15 @@ def fbnc(n):
 def fbnc_dp0(n):
     dp = [0] * (n + 1)
 
-    def fbnc_dp_arr(i, arr):
-        if arr[i]:
-            return arr[i]
+    def fbnc_dp_step(i):
+        if dp[i]:
+            return dp[i]
         if i < 2:
             return i
-        arr[i] = fbnc_dp_arr(i - 1, arr) + fbnc_dp_arr(i - 2, arr)
-        return arr[i]
+        dp[i] = fbnc_dp_step(i - 1) + fbnc_dp_step(i - 2)
+        return dp[i]
 
-    return fbnc_dp_arr(n, dp)
+    return fbnc_dp_step(n)
 
 
 # 自底向上动态规划
