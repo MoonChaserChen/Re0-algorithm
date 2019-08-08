@@ -6,7 +6,7 @@ def fbnc(n):
     return n if n < 2 else fbnc(n - 1) + fbnc(n - 2)
 
 
-# 自顶向下
+# 自顶向下动态规划
 def fbnc_dp0(n):
     dp = [0] * (n + 1)
 
@@ -21,7 +21,7 @@ def fbnc_dp0(n):
     return fbnc_dp_arr(n, dp)
 
 
-# 自底向上
+# 自底向上动态规划
 def fbnc_dp1(n):
     dp = [0] * (n + 1)
     dp[1] = 1
@@ -30,7 +30,7 @@ def fbnc_dp1(n):
     return dp[n]
 
 
-# 自底向上省空间
+# 自底向上动态规划省空间
 def fbnc_dp2(n):
     if n < 2:
         return n
