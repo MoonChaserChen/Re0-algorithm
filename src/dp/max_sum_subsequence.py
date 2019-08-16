@@ -63,18 +63,6 @@ class MaxSumSubSequence:
             max_sum = max(max_sum, max_step)
         return max_sum
 
-    # 自底向上省空间再优化
-    def dp3(self):
-        le = len(self.arr)
-        max_sum = max_step = self.arr[0]
-        for i in range(1, le):
-            # 最大连续子序列的结尾是不可能小于0的
-            if self.arr[i] <= 0:
-                continue
-            max_step = self.arr[i] if max_step <= 0 else max_step + self.arr[i]
-            max_sum = max(max_sum, max_step)
-        return max_sum
-
 
 data = [-14, -19, 8, 7, 7, 7, 3, 11, 8, -9, -6, -1]
 mss = MaxSumSubSequence(data)
@@ -83,4 +71,3 @@ print("ite result:", mss.ite(), ", take time:", timeit.timeit("MaxSumSubSequence
 print("dp from top result:", mss.dp(), ", take time:", timeit.timeit("MaxSumSubSequence([-14, -19, 8, 7, 7, 7, 3, 11, 8, -9, -6, -1]).dp()", setup="from __main__ import MaxSumSubSequence", number=10000))
 print("dp from bottom result:", mss.dp1(), ", take time:", timeit.timeit("MaxSumSubSequence([-14, -19, 8, 7, 7, 7, 3, 11, 8, -9, -6, -1]).dp1()", setup="from __main__ import MaxSumSubSequence", number=10000))
 print("dp from bottom save space result:", mss.dp2(), ", take time:", timeit.timeit("MaxSumSubSequence([-14, -19, 8, 7, 7, 7, 3, 11, 8, -9, -6, -1]).dp2()", setup="from __main__ import MaxSumSubSequence", number=10000))
-print("dp from bottom save space optimization result:", mss.dp3(), ", take time:", timeit.timeit("MaxSumSubSequence([-14, -19, 8, 7, 7, 7, 3, 11, 8, -9, -6, -1]).dp3()", setup="from __main__ import MaxSumSubSequence", number=10000))
