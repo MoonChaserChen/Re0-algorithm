@@ -7,6 +7,7 @@ suffix = ".md"
 gen_file_name = "summary.md"
 doc_path = "docs"
 read_me_file = "README.md"
+ico_file = "favicon.ico"
 cname_file = "CNAME"
 
 ignore_files = [gen_file_name, ".git", read_me_file, "images"]
@@ -38,6 +39,7 @@ def print_file(c_dir, depth, sidebar_file, readme_file):
 os.chdir(doc_path)
 copyfile("../" + read_me_file, read_me_file)
 copyfile("../" + cname_file, cname_file)
+copyfile("../" + ico_file, ico_file)
 
 # 为README.md生成目录；生成左侧sidebar(summary.md)
 g_f = codecs.open(gen_file_name, 'w', encoding='utf-8')
