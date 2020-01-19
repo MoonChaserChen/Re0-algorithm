@@ -38,7 +38,6 @@ print(get_next(pat))
 def get_next0(p):
     p_len = len(p)
     p_next = [0] * p_len
-    p_next[0] = 0
     idx_r = 0
     for i in range(1, p_len):
         if p_next[i - 1] == 0:
@@ -50,11 +49,9 @@ def get_next0(p):
 
 
 def get_next1(p):
-    p_len = len(p)
-    p_next = [0] * p_len
-    p_next[0] = 0
+    p_next = [0] * len(p)
     idx_r = 0
-    for i in range(1, p_len):
+    for i in range(1, len(p)):
         p_next[i] = p_next[i - 1] + 1 if p[i] == p[idx_r] else 0
         idx_r = idx_r + 1 if p_next[i] != 0 else 0
     return p_next
