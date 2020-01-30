@@ -1,42 +1,20 @@
-import copy
+def reverse(x):
+    """
+    :type x: int
+    :rtype: int
+    """
+    flag = 1 if x > 0 else -1
+    re = 0
+    abs_x = abs(x)
+    while abs_x > 0:
+        quo, rem = divmod(abs_x, 10)
+        re = re * 10 + rem
+        abs_x = quo
+    result = flag * re
+    return result if -2 ** 31 < result < 2 ** 31 - 1 else 0
 
 
-class BigDecimal:
-    def __init__(self, v_str):
-        if v_str is not None:
-            arr = list(v_str)
-            arr.reverse()
-            self.r_a = copy.deepcopy(arr)
-
-    def __str__(self):
-        r_arr = copy.deepcopy(self.r_a)
-        r_arr.reverse()
-        return ''.join(r_arr)
-
-    def add(self, another_bd):
-        """
-        :type another_bd BigDecimal
-        """
-        le1 = len(self.r_a)
-        le2 = len(another_bd.r_a)
-        i, up_in, re = 0, 0, []
-        for i in range(max(le1, le2)):
-            a1 = int(self.r_a[i]) if i < le1 else 0
-            a2 = int(another_bd.r_a[i]) if i < le2 else 0
-            s = a1 + a2 + up_in
-            if s > 9:
-                s -= 10
-                up_in = 1
-            else:
-                up_in = 0
-            re.append(str(s))
-        if up_in == 1:
-            re.append('1')
-        result = BigDecimal(None)
-        result.r_a = re
-        return result
-
-
-bd1 = BigDecimal("32675766")
-bd2 = BigDecimal("347852948")
-print(bd1.add(bd2))
+print((1 << 31) - 1)
+print(reverse(1534236469))
+# 1534236469
+# 2147483647
