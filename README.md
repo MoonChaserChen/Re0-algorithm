@@ -1,2 +1,2 @@
 # Re0-algorithm
-从零开始的算法学习
+基于Python的算法学习
