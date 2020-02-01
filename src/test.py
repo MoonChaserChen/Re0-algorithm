@@ -1,14 +1,12 @@
-def is_palindrome(x):
+def romanToInt(s):
     """
-    :type x: int
-    :rtype: bool
+    :type s: str
+    :rtype: int
     """
-    if x < 0 or x % 10 == 0 and x != 0:
-        return False
-    r_x = 0
-    while x > r_x:
-        r_x = r_x * 10 + x % 10
-        x //= 10
-    return x == r_x or x == r_x // 10
+    d_r_m = {"I":1, "V":5, "X": 10, "L":50, "C":100, "D": 500, "M":1000}
+    for i in s:
+        print(i)
 
-print(is_palindrome(123))
+for i in range(10):
+    print(i) # 0 1 2 3 4 5 6 7 8 9
+    i += 1
