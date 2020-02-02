@@ -1,3 +1,14 @@
-print(list(zip([1, 2, 3], [4, 5]))) # [(1, 4), (2, 5)]
-L = ['a', 'b', 'c', 'd', 'e', 'f']
-print(list(zip(L[:-1], L[1:]))) # [('a', 'b'), ('b', 'c'), ('c', 'd'), ('d', 'e'), ('e', 'f')]
+def longest_common_prefix(strs):
+    """
+    :type strs: List[str]
+    :rtype: str
+    """
+    if not strs: return ""
+    prefix = strs[0]
+    for i, v in enumerate(prefix):
+        for j in range(1, len(strs)):
+            if len(strs[j]) == i or v != strs[j][i]: return prefix[:i]
+    return prefix
+
+
+print(longest_common_prefix(['aaaaa', 'aa']))
