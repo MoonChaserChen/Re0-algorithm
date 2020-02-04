@@ -1,18 +1,4 @@
-def remove_element(nums, val):
-    """
-    :type nums: List[int]
-    :type val: int
-    :rtype: int
-    """
-    i, n = 0, len(nums)
-    while i < n:
-        if nums[i] == val:
-            nums[i] = nums[n - 1]
-            n -= 1
-        else:
-            i += 1
-    return i
-
-nums0 = [3, 3, 1, 2, 3, 4]
-remove_element(nums0, 3)
-print(nums0)
+print(list(range(10))) # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(list(range(1, 10))) # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(list(range(1, 10, 2))) # [1, 3, 5, 7, 9]
+print(list(range(9, -1, -2))) # [9, 7, 5, 3, 1]
