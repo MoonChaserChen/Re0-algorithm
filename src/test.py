@@ -1,26 +1,19 @@
-def cal_shift_mat(p):
-    dic = {}
-    len_p = len(p)
-    for i in range(len_p - 1, -1, -1):
-        if p[i] not in dic:
-            dic[p[i]] = len_p - i
-    return dic
-
-def find(s, p):
-    if p == "": return 0
-    len_s, len_p = len(s), len(p)
-    dic = cal_shift_mat(p)
-    idx = 0
-    while idx + len_p <= len_s:
-        if s[idx: idx + len_p] == p:
-            return idx
-        elif idx + len_p == len_s:
-            return -1
+def bi_search(arr, e):
+    lo, hi = 0, len(arr) - 1
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if arr[mid] == e:
+            return mid
+        elif arr[mid] < e:
+            lo = mid + 1
         else:
-            idx += dic.get(s[idx + len_p], len_p + 1)
-    return -1
-
-print(find("abc", "c"))
+            hi = mid - 1
+    return lo
 
 
-
+arr0 = [1, 2, 3, 4, 6, 7, 8, 9, 10]
+for x in arr0:
+    print(bi_search(arr0, x))
+print(bi_search(arr0, 0))
+print(bi_search(arr0, 11))
+print(bi_search(arr0, 5))
