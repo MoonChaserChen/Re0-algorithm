@@ -1,28 +1,15 @@
-def say(s):
-    i, le = 0, len(s)
-    re = ""
-    while i < le:
-        ct, c = 1, s[i]
-        while i != le - 1 and s[i + 1] == c:
-            ct += 1
-            i += 1
-        re += str(ct) + c
-        i += 1
-    return re
-
-def count_and_say( n):
+def lengthOfLastWord(s):
     """
-    :type n: int
-    :rtype: str
+    :type s: str
+    :rtype: int
     """
-    re = "1"
-    while n > 1:
-        re = say(re)
+    n, ct = len(s), 0
+    while n > 0:
         n -= 1
-    return re
+        if s[n] == ' ':
+            return ct
+        else:
+            ct += 1
+    return ct
 
-print(say("1"))
-print(say("11"))
-print(say("21"))
-print(say("1211"))
-print(say("111221"))
+print(lengthOfLastWord("a "))
