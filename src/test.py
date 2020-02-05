@@ -1,19 +1,28 @@
-def bi_search(arr, e):
-    lo, hi = 0, len(arr) - 1
-    while lo <= hi:
-        mid = (lo + hi) // 2
-        if arr[mid] == e:
-            return mid
-        elif arr[mid] < e:
-            lo = mid + 1
-        else:
-            hi = mid - 1
-    return lo
+def say(s):
+    i, le = 0, len(s)
+    re = ""
+    while i < le:
+        ct, c = 1, s[i]
+        while i != le - 1 and s[i + 1] == c:
+            ct += 1
+            i += 1
+        re += str(ct) + c
+        i += 1
+    return re
 
+def count_and_say( n):
+    """
+    :type n: int
+    :rtype: str
+    """
+    re = "1"
+    while n > 1:
+        re = say(re)
+        n -= 1
+    return re
 
-arr0 = [1, 2, 3, 4, 6, 7, 8, 9, 10]
-for x in arr0:
-    print(bi_search(arr0, x))
-print(bi_search(arr0, 0))
-print(bi_search(arr0, 11))
-print(bi_search(arr0, 5))
+print(say("1"))
+print(say("11"))
+print(say("21"))
+print(say("1211"))
+print(say("111221"))
