@@ -1,15 +1,29 @@
-def lengthOfLastWord(s):
-    """
-    :type s: str
-    :rtype: int
-    """
-    n, ct = len(s), 0
-    while n > 0:
-        n -= 1
-        if s[n] == ' ':
-            return ct
+def two_sum(nums, target):
+    dic = {}
+    re = []
+    for x in nums:
+        rem = target - x
+        if rem in dic:
+            re.append([x, rem])
         else:
-            ct += 1
-    return ct
+            dic[x] = rem
+    return re
 
-print(lengthOfLastWord("a "))
+def two_sum1(nums, target):
+    dic = {}
+    re = []
+    for x in nums:
+        rem = target - x
+        if rem in dic:
+            for y in dic[rem]:
+                re.append([x, rem])
+        arr = dic.get(x)
+        if arr:
+            arr.append(rem)
+        else:
+            dic[x] = [rem]
+    return re
+
+nums0 = [-9, -5, -4, 4, 5, 9, 0, 0, 0, 0]
+print(two_sum(nums0, 0))
+print(two_sum1(nums0, 0)) # [[4, -4], [5, -5], [9, -9], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
