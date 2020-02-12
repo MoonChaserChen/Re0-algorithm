@@ -4,17 +4,13 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def min_depth(root: TreeNode) -> int:
-    if not root: return 0
-    current_level_stack = [root]
-    next_level_stack = []
-    level_i = 1
-    while current_level_stack:
-        node = current_level_stack.pop()
-        if not node.left and not node.right:
-            return level_i
-        if node.left: next_level_stack.append(node.left)
-        if node.right: next_level_stack.append(node.right)
-        if not current_level_stack:
-            level_i += 1
-            current_level_stack, next_level_stack = next_level_stack, []
+def has_path_sum(root: TreeNode, target: int) -> bool:
+    if not root: return False
+    stack = [(root, root.val)]
+    while stack:
+        node, s = stack.pop()
+        if not node.left and not node.right and s == target:
+            return True
+        if node.right: stack.append((node.right, s + node.right.val))
+        if node.left: stack.append((node.left, s + node.left.val))
+    return False
