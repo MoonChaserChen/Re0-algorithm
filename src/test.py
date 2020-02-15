@@ -1,9 +1,6 @@
-def max_profit(prices: list) -> int:
-    min_val = None
+def max_profit(prices: int) -> int:
     profit = 0
-    for x in prices:
-        if min_val is None or x < min_val:
-            min_val = x
-        else:
-            profit = max(profit, x - min_val)
+    for i in range(1, len(prices)):
+        if prices[i] > prices[i - 1]:
+            profit += prices[i] - prices[i - 1]
     return profit
