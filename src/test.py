@@ -1,6 +1,3 @@
-def max_profit(prices: int) -> int:
-    profit = 0
-    for i in range(1, len(prices)):
-        if prices[i] > prices[i - 1]:
-            profit += prices[i] - prices[i - 1]
-    return profit
+c = "A"
+print(c.lower())
+print(c)
