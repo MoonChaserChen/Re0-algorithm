@@ -1,5 +1,9 @@
-def single_number(nums: list) -> int:
-    re = nums[0]
-    for i in range(1, len(nums)):
-        re ^= nums[i]
-    return re
+def find_duplicate(nums: list) -> int:
+    slow, fast = 0, 0
+    slow, fast = nums[slow], nums[nums[fast]]
+    while slow != fast:
+        slow, fast = nums[slow], nums[nums[fast]]
+    n1, n2 = 0, slow
+    while n1 != n2:
+        n1, n2 = nums[n1], nums[n2]
+    return n1
