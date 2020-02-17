@@ -1,13 +1,13 @@
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+def is_happy(n: int) -> bool:
+    slow, fast = hn(n), hn(hn(n))
+    while slow != fast:
+        slow, fast = hn(slow), hn(hn(fast))
+    return slow == 1
 
-def has_cycle(head: ListNode) -> bool:
-    if not head or not head.next: return False
-    slow_curr, fast_curr = head.next, head.next.next
-    while slow_curr != fast_curr:
-        if not fast_curr or not fast_curr.next: return False
-        slow_curr = slow_curr.next
-        fast_curr = fast_curr.next.next
-    return True
+def hn(n: int) -> int:
+    s = 0
+    while n:
+        r = n % 10
+        s += r * r
+        n //= 10
+    return s
