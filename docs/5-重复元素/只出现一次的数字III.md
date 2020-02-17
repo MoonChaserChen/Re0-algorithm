@@ -16,6 +16,23 @@
 
 ## 解答
 [传送门](https://leetcode-cn.com/problems/single-number-iii/solution/zhi-chu-xian-yi-ci-de-shu-zi-iii-by-leetcode/)
+设这两个数为x,y，则所有数异或得到：bitmask = x^y
+bitmask & (-bitmask)保留bitmask最右边的1，这个1要么来自x，要么来自y
 ```python
+def single_number(nums: [int]) -> [int]:
+    # difference between two numbers (x and y) which were seen only once
+    bitmask = 0
+    for num in nums:
+        bitmask ^= num
 
+    # rightmost 1-bit diff between x and y
+    diff = bitmask & (-bitmask)
+
+    x = 0
+    for num in nums:
+        # bitmask which will contain only x
+        if num & diff:
+            x ^= num
+
+    return [x, bitmask^x]
 ```

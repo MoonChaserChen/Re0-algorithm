@@ -1,4 +1,4 @@
-def single_number(nums: [int]) -> list:
+def single_number(nums: [int]) -> [int]:
     # difference between two numbers (x and y) which were seen only once
     bitmask = 0
     for num in nums:
