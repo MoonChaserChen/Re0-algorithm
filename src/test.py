@@ -1,18 +1,10 @@
-from collections import deque
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
-
-def find_target(root: TreeNode, k: int) -> bool:
-    if not root: return False
-    dic = {}
-    dq = deque([root])
-    while dq:
-        node = dq.popleft()
-        if k - node.val in dic: return True
-        dic[node.val] = 1
-        if node.left: dq.append(node.left)
-        if node.right: dq.append(node.right)
-    return False
+def convert2title(n: int) -> str:
+    ar = ""
+    while n > 0:
+        c = n % 26
+        if c == 0:
+            c = 26
+            n -= 1
+        ar += chr(ord('A') - 1 + c)
+        n //= 26
+    return ar[::-1]
