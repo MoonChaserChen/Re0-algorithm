@@ -1,11 +1,7 @@
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-def get_intersection_node(head_a: ListNode, head_b: ListNode) -> ListNode:
-    ha, hb = head_a, head_b
-    while ha != hb:
-        ha = ha.next if ha else head_b
-        hb = hb.next if hb else head_a
-    return ha
+def two_sum(numbers: [int], target: int) -> [int]:
+    i, j = 0, len(numbers) - 1
+    while i < j:
+        s = numbers[i] + numbers[j]
+        if s == target: return i + 1, j + 1
+        elif s < target: i += 1
+        else: j -= 1
