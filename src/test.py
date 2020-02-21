@@ -1,10 +1,9 @@
-def convert2title(n: int) -> str:
-    ar = ""
-    while n > 0:
-        c = n % 26
-        if c == 0:
-            c = 26
-            n -= 1
-        ar += chr(ord('A') - 1 + c)
-        n //= 26
-    return ar[::-1]
+def majority_element(nums: [int]) -> int:
+    s, majority = 0, None
+    for x in nums:
+        if s == 0: majority = x
+        if x != majority: s-= 1
+        else: s += 1
+    return majority
+
+print(majority_element([1, 2, 3, 2, 2, 1]))
