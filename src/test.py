@@ -1,24 +1,25 @@
 from collections import deque
-import threading
 
 
-class MyStack:
+class MyQueue:
     def __init__(self):
-        self.lock = threading.RLock()
-        self.dq = deque([])
+        self.stack1 = deque([])
+        self.stack2 = deque([])
+        self.first = None # stack1 栈底元素
 
     def push(self, x: int) -> None:
-        with self.lock:
-            le = len(self.dq)
-            self.dq.append(x)
-            for i in range(le):
-                self.dq.append(self.dq.popleft())
+        if not self.stack1: self.first = x
+        self.stack1.append(x)
 
     def pop(self) -> int:
-        return self.dq.popleft()
+        if not self.stack2:
+            while self.stack1:
+                self.stack2.append(self.stack1.pop())
+        return self.stack2.pop()
 
-    def top(self) -> int:
-        return self.dq[0] if len(self.dq) > 0 else None
+    def peek(self) -> int:
+        if self.stack2: return self.stack2[-1]
+        return self.first
 
     def empty(self) -> bool:
-        return len(self.dq) == 0
+        return len(self.stack1) == 0 and len(self.stack2) == 0
