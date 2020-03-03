@@ -1,11 +1,8 @@
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-def reverse_list(head: ListNode) -> ListNode:
-    if not head or not head.next: return head
-    p = reverse_list(head.next)
-    head.next.next = head
-    head.next = None
-    return p
+def reverse_bits(n: int) -> int:
+    res = 0
+    c = 31
+    while n != 0:
+        res |= (n & 1) << c
+        c -= 1
+        n >>= 1
+    return res
