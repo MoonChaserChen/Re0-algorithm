@@ -1,6 +1,5 @@
-def hamming_weight(n: int) -> int:
-    re = 0
-    while n > 0:
-        re += n & 1
-        n >>= 1
-    return re
+def rob(nums: [int]) -> int:
+    t1, t2 = 0, 0
+    for i in range(len(nums)):
+        t1, t2 = t2, max(t1 + nums[i], t2)
+    return t2
