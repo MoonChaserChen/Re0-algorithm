@@ -1,7 +1,15 @@
-def rob(nums: [int]) -> int:
-    def my_rob(nums: [int]) -> int:
-        t1, t2 = 0, 0
-        for num in nums:
-            t1, t2 = t2, max(t1 + num, t2)
-        return t2
-    return max(my_rob(nums[1:]), my_rob(nums[:-1])) if len(nums) != 1 else nums[0]
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+
+def rob(root: TreeNode) -> int:
+    def rob_internal(node: TreeNode):
+        if not node: return 0, 0
+        re_left, re_right = rob_internal(node.left), rob_internal(node.right)
+        re0 = max(re_left) + max(re_right)
+        re1 = node.val + re_left[0] + re_right[0]
+        return re0, re1
+    return max(rob_internal(root))
