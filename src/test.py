@@ -1,12 +1,19 @@
-def max_product(nums: [int]) -> int:
-    max_re = max_step = min_step = None
-    for num in nums:
-        if max_re is None:
-            max_re = max_step = min_step = num
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+def remove_elements(head: ListNode, val: int) -> ListNode:
+    sentinel = ListNode(0)
+    sentinel.next = head
+
+    prev, curr = sentinel, head
+    while curr:
+        if curr.val == val:
+            prev.next = curr.next
         else:
-            candidate = [max_step * num, min_step * num, num]
-            max_step = max(candidate)
-            min_step = min(candidate)
-            if max_step > max_re:
-                max_re = max_step
-    return max_re
+            prev = curr
+        curr = curr.next
+
+    return sentinel.next
