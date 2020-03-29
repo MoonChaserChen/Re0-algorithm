@@ -1,12 +1,9 @@
-from typing import List
-def minimum_length_encoding(self, words: List[str]) -> int:
-    sorted(words)
-    words.sort(key=lambda x: x[::-1])
-    return sum(len(v) + 1 for i, v in enumerate(words) if i == len(words) - 1 or not words[i + 1].endswith(v))
+from typing import Dict, List, Tuple
 
-def fun(words: List[str]) -> None:
-    words.sort()
+names: List[str] = ["Guido", "Jukka", "Ivan"]
+version: Tuple[int, int, int] = (3, 7, 1)
+options: Dict[str, bool] = {"centered": False, "capitalize": True}
 
-arr = [1, 9, 4, 7]
-arr.sort()
-print(arr)
+
+def get_length(arr: List[str]):
+    return len(arr)
