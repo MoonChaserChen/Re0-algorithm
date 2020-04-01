@@ -1,24 +1,14 @@
-from typing import List
+def count_primes(n: int) -> int:
+    arr = [True] * n
+    for i in range(n):
+        if i <= 1:
+            arr[i] = False
+        elif arr[i]:
+            j = i
+            while i * j < n:
+                arr[i * j] = False
+                j += 1
+    return sum([1 if x else 0 for x in arr])
 
 
-def merge_sort(nums, l, r):
-    if l == r:
-        return
-    mid = (l + r) // 2
-    merge_sort(nums, l, mid)
-    merge_sort(nums, mid + 1, r)
-    tmp = []
-    i, j = l, mid + 1
-    while i <= mid or j <= r:
-        if i > mid or (j <= r and nums[j] < nums[i]):
-            tmp.append(nums[j])
-            j += 1
-        else:
-            tmp.append(nums[i])
-            i += 1
-    nums[l: r + 1] = tmp
-
-
-def sort_array(nums: List[int]) -> List[int]:
-    merge_sort(nums, 0, len(nums) - 1)
-    return nums
+print(count_primes(10))
