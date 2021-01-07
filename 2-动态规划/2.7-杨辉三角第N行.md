@@ -1,0 +1,28 @@
+# 杨辉三角第N行
+给定一个非负索引 n，其中 n ≤ 33，返回杨辉三角的第 n 行。
+
+```
+在杨辉三角中，每个数是它左上方和右上方的数的和。
+
+示例:
+
+输入: 3
+输出: [1,3,3,1]
+进阶：
+
+你可以优化你的算法到 O(n) 空间复杂度吗？
+```
+
+来源：[LeetCode](https://leetcode-cn.com/problems/pascals-triangle-ii)
+
+## 解答
+```python
+def get_row(row_index: int) -> list:
+    arr = [1] * (row_index + 1)
+    if row_index < 2: return arr
+    for i in range(2, row_index + 1):
+        for j in range(i - 1, 0, -1):
+            arr[j] += arr[j - 1]
+    return arr
+```
+
