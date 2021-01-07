@@ -6,7 +6,7 @@ Design a data structure for LRU Cache. It should support the following operation
 | get(key) | Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1. |
 | set(key, value) | Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item. |
 
-## Java实现
+## Java-HashMap实现
 ```java
 public class LruCache<K, V> {
     private int capacity;
@@ -78,6 +78,23 @@ public class LruCache<K, V> {
             this.key = key;
             this.value = value;
         }
+    }
+}
+```
+
+## Java-LinkedHashMap实现
+```java
+public class LruCache<K, V> extends LinkedHashMap<K, V> {
+    private final int capacity;
+
+    public LruCache(int capacity) {
+        super(capacity, 0.75f, true);
+        this.capacity = capacity;
+    }
+
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+        return size() > capacity;
     }
 }
 ```
