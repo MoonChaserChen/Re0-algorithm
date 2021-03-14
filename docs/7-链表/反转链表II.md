@@ -41,6 +41,7 @@ def reverse_k_group(head, k):
             c = t
         return c, tt, th
     curr, tt1, th1 = reverse(head)
+    # 通过每组的尾tail拼接下一组的头
     tail = th1
     re = tt1
     while curr:
