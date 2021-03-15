@@ -1,54 +1,16 @@
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+from collections import OrderedDict
 
-    def __str__(self):
-        return str(self.val)
-
-#
-#
-# @param head ListNode类
-# @param k int整型
-# @return ListNode类
-#
-class Solution:
-    def reverse_k_group(self, head, k):
-        if not head:
-            return head
-        h = t = head
-        for i in range(k):
-            if not t:
-                return head
-            t = t.next
-        new_head = reverse(h, t)
-        h.next = self.reverse_k_group(t, k)
-        return new_head
-
-
-# [h, t) 翻转
-def reverse(h, t):
-    p, c = None, h
-    while c != t:
-        temp = c.next
-        c.next = p
-        p = c
-        c = temp
-    return p
-
-
-n1 = ListNode(1)
-n2 = ListNode(2)
-n3 = ListNode(3)
-n4 = ListNode(4)
-n5 = ListNode(5)
-n6 = ListNode(6)
-n1.next = n2
-n2.next = n3
-n3.next = n4
-n4.next = n5
-# n5.next = n6
-
-
-r = Solution().reverse_k_group(n1, 3)
-print(r)
+od = OrderedDict()
+od['a'] = 1
+od['b'] = 2
+od['c'] = 3
+od['d'] = 4
+od['e'] = 5
+od['f'] = 6
+print(od.popitem())  # ('f', 6)
+print(od.popitem(last=False))  # ('a', 1)
+print(od)  # [('b', 2), ('c', 3), ('d', 4), ('e', 5)]
+od.move_to_end('c')
+print(od)  # [('b', 2), ('d', 4), ('e', 5), ('c', 3)]
+od.move_to_end('e', last=False)
+print(od)  # [('e', 5), ('b', 2), ('d', 4), ('c', 3)]
