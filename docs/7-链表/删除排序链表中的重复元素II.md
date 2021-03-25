@@ -61,3 +61,20 @@ def delete_duplicates(head: ListNode) -> ListNode:
             cur = cur.next
     return dummy.next
 ```
+
+## 递归
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def delete_duplicates(head: ListNode, pv=None) -> ListNode:
+    if not head:
+        return head
+    if pv is not None and head.val == pv or head.next and head.val == head.next.val:
+        return delete_duplicates(head.next, head.val)
+    else:
+        head.next = delete_duplicates(head.next, head.val)
+        return head
+```
