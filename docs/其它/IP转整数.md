@@ -1,3 +1,6 @@
+# IP转整数
+## 解法
+```python
 def ip2int(ip):
     res = 0
     ips = ip.split(".")
@@ -17,5 +20,5 @@ def int2ip(int_v):
     return ".".join(map(str, arr))
 
 
-print(ip2int("100.101.1.5"))
 print(int2ip(ip2int("1.2.5.9")))
+```
