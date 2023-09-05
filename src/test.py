@@ -1,21 +1,14 @@
-def ip2int(ip):
-    res = 0
-    ips = ip.split(".")
-    res |= int(ips[0]) << 24
-    res |= int(ips[1]) << 16
-    res |= int(ips[2]) << 8
-    res |= int(ips[3])
-    return res
+def solve(int_list):
+    sum_left, sum_right = 0, 0
+    for i, x in enumerate(int_list):
+        if i == 0:
+            sum_left, sum_right = int_list[i], sum(int_list)
+        else:
+            sum_left += int_list[i]
+            sum_right -= int_list[i - 1]
+        if sum_left == sum_right:
+            return i
+    return -1
 
 
-def int2ip(int_v):
-    arr = []
-    for i in range(4):
-        arr.append(int_v & 255)
-        int_v >>= 8
-    arr.reverse()
-    return ".".join(map(str, arr))
-
-
-print(ip2int("100.101.1.5"))
-print(int2ip(ip2int("1.2.5.9")))
+print(solve(list(map(int, "11".split(',')))))
