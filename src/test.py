@@ -1,56 +1,33 @@
-class Nums:
-    """
-    表示：20-21 或 15
-    """
-    def __init__(self, _from, _to=None):
-        self._from = _from
-        self._to = _to if _to is not None else _from
+class CarParkMonitor:
+    def __init__(self, car_park):
+        self.car_park = car_park
 
-    def check_between(self, _val):
-        return self._from <= _val <= self._to
-
-    def split(self, _val):
-        if self.check_between(_val):
-            if self._from == self._to:
-                return []
-            return [Nums(self._from, _val - 1), Nums(_val + 1, self._to)]
-        else:
-            raise Exception("Can not split")
-
-    def to_plain_string(self):
-        return str(self._from) + ("" if self._from == self._to else "_" + str(self._to))
-
-    @staticmethod
-    def of(val):
-        vals = list(map(int, val.split("-")))
-        return Nums(vals[0]) if len(vals) == 1 else Nums(vals[0], vals[1])
-
-
-class NumsPool:
-    """
-    表示：20-21,15,18,30,5-10
-    """
-    def __init__(self, include_nums):
-        self.include_nums = include_nums
-
-    def add(self, other):
-        self.include_nums.append(other)
-
-    def remove_val(self, remove_val):
-        for i, x in enumerate(self.include_nums):
-            if x.check_between(remove_val):
-                self.include_nums.pop(i)
-                for y in reversed(x.split(remove_val)):
-                    self.include_nums.insert(i, y)
-
-    def to_plain_string(self):
-        return ",".join(list(map(Nums.to_plain_string, self.include_nums)))
+    def count_monitor(self):
+        x = len(self.car_park)
+        y = len(self.car_park[0])
+        re = 0
+        for i in range(x):
+            for j in range(y):
+                if self.car_park[i][j]:
+                    re += 1
+                    continue
+                has_neighbor = False
+                if i > 0 and self.car_park[i - 1][j]:
+                    has_neighbor = True
+                if i < x - 1 and self.car_park[i + 1][j]:
+                    has_neighbor = True
+                if j > 0 and self.car_park[i][j - 1]:
+                    has_neighbor = True
+                if j < y - 1 and self.car_park[i][j + 1]:
+                    has_neighbor = True
+                if has_neighbor:
+                    re += 1
+        return re
 
 
-def solve(int_list_str, remove_val):
-    vlan = NumsPool(sorted(list(map(Nums.of, int_list_str.split(","))), key=lambda x: x._from))
-    vlan.remove_val(remove_val)
-    print(vlan.to_plain_string())
-
-
-solve("20-21,15,18,30,5-10", 15)
+x0, y0 = map(int, input().split(" "))
+car_park_arr = []
+for k in range(y0):
+    car_park_arr.append(list(map(int, input().split(" "))))
+cpm = CarParkMonitor(car_park_arr)
+print(cpm.count_monitor())
