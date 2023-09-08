@@ -1,25 +1,15 @@
-def get_min_str(strs: str):
-    sorted_str = sorted(strs)
-    change_from, change_to = "", ""
-    swapped = False
-    result = ""
-    for i in range(len(strs)):
-        # 从strs找到第一个与sorted_str不同的字符，这两个不同的字符即为要交换的字符change_from, change_to
-        # 先替换成change_from
-        if change_from == "" and strs[i] != sorted_str[i]:
-            change_from = sorted_str[i]
-            change_to = strs[i]
-            result += change_from
-        # 后续找到第一个change_from，修改成change_to即可
-        elif not swapped and change_from == strs[i]:
-            result += change_to
-            swapped = True
-        # 已不需要替换，直接追加到result后
-        else:
-            result += strs[i]
-    return result
+def get_shortest_step(nums):
+    le = len(nums)
+    steps = []
+    for i in range(1, le // 2):
+        step = 1
+        while i < le - 1:
+            i += nums[i]
+            step += 1
+        if i == le - 1:
+            steps.append(step)
+    return -1 if len(steps) == 0 else min(steps)
 
-print(get_min_str("abcdef"))
-print(get_min_str("agcdef"))
-print(get_min_str("bcdefa"))
-print(get_min_str("aaddcc"))
+
+print(get_shortest_step([7, 5, 9, 4, 2, 6, 8, 3, 5, 4, 3, 9]))
+print(get_shortest_step([1, 2, 3, 7, 1, 5, 9, 3, 2, 1]))
