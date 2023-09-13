@@ -1,8 +1,8 @@
-def solve(num_arr):
-    num_arr.sort()
-    choose_num = num_arr[:3]
-    choose_num.sort(key=str)
-    return int("".join(map(str, choose_num)))
+def solve(heights, weights):
+    le = len(heights)
+    nums = list(range(0, le))
+    nums.sort(key=lambda i: [heights[i], weights[i]])
+    return list(map(lambda x: x + 1, nums))
 
-assert solve([21, 30, 62, 5, 31]) == 21305
-assert solve([5, 21]) == 215
+
+print(solve([100, 100, 120, 130], [40, 30, 60, 50]))
