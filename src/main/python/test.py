@@ -1,29 +1,10 @@
-def solve(money: int, prices):
-    le = len(prices)
-    prices.sort()
-    if le < 3 or sum(prices[0: 3]) > money:
-        return -1
-    max_sum = 0
-    # 遍历中间那个数i，滑动左右start,end
-    for i in range(1, le - 1):
-        start, end = 0, le - 1
-        while start < end:
-            # 不能用相同的数，所以要跳过 start=i, end=i
-            if i == start:
-                start += 1
-                continue
-            if i == end:
-                end -= 1
-                continue
-            curr_sum = prices[start] + prices[i] + prices[end]
-            if curr_sum > money:
-                end -= 1
-            else:
-                max_sum = max(max_sum, curr_sum)
-                start += 1
-    return max_sum
+def climb_stairs(n: int):
+    dp = [1, 1, 2]
+    for i in range(3, n):
+        dp.append(dp[i - 1] + dp[i - 3])
+    return dp[n - 1]
 
-assert solve(78, [23, 26, 36, 27]) == 76
-assert solve(1000, [23, 26, 36, 27]) == 89
-assert solve(65, [23, 33, 22, 18]) == 63
-assert solve(62, [23, 33, 22, 18]) == -1
+print(climb_stairs(4))
+print(climb_stairs(5))
+print(climb_stairs(6))
+print(climb_stairs(50))
