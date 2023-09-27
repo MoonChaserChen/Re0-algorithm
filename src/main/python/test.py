@@ -1,27 +1,14 @@
-def find_diagonal_order(matrix):
-    n_x, n_y = len(matrix), len(matrix[0])
-    result = []
-    # 共循环s次(n_x + n_y - 1)
-    s = 0
-    while s < n_x + n_y - 1:
-        # 每次循环的方向与上次循环相反
-        if s % 2 == 0:
-            # 每次循环有多个数，且这些数的坐标（x, y）满足以下条件:
-            # x + y = s
-            # x最大为n_x - 1; y最大为n_y - 1
-            x = min(n_x - 1, s)
-            while x >= 0 and s - x < n_y:
-                result.append(matrix[x][s - x])
-                x -= 1
-        else:
-            y = min(n_y - 1, s)
-            while y >= 0 and s - y < n_x:
-                result.append(matrix[s - y][y])
-                y -= 1
-        s += 1
-    return result
+def longest_common_prefix(strs):
+    n = min(map(len, strs))
+    result = ""
+    for i in range(n):
+        c = None
+        for x in strs:
+            if c is None:
+                c = x[i]
+            elif c != x[i]:
+                return result
+        result += c
 
 
-assert find_diagonal_order([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [1, 2, 4, 7, 5, 3, 6, 8, 9]
-assert find_diagonal_order([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]) == [1, 2, 5, 9, 6, 3, 4, 7, 10, 11, 8, 12]
-assert find_diagonal_order([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]) == [1, 2, 4, 7, 5, 3, 6, 8, 10, 11, 9, 12]
+assert longest_common_prefix(["flower", "flow", "flight"]) == "fl"
