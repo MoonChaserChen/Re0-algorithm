@@ -32,5 +32,3 @@ def max_kelements(nums: List[int], k: int) -> int:
 
 assert max_kelements([10, 10, 10, 10, 10], 5) == 50
 assert max_kelements([1, 10, 3, 3, 3], 3) == 17
-
-# 13094484235
