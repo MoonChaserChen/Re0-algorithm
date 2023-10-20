@@ -35,12 +35,52 @@ def print_file(c_dir, depth, sidebar_file, readme_file):
                 readme_file.write(content)
 
 
+def read_tag():
+    doc_suffix = "md"
+    ignore_dirs = ["./images"]
+    tag_head = "## Tag"
+    tag_prefix = "- "
+
+    result = {}
+    for p_dir, dirs, files in os.walk("./"):
+        # p_dir目录，dirs目录下文件夹名列表，files目录下文件名列表
+        if p_dir in ignore_dirs:
+            continue
+        for file in files:
+            if doc_suffix not in file:
+                continue
+            f_p = p_dir + "/" + file
+            f = open(f_p)
+            line = f.readline()
+            while line:
+                if line.strip() == tag_head.strip():
+                    line = f.readline()
+                    while line.startswith(tag_prefix):
+                        tag = line[2:].strip()
+                        if tag not in result:
+                            result[tag] = []
+                        result[tag].append((f_p, file[:-3]))
+                        line = f.readline()
+                    break
+                line = f.readline()
+            f.close()
+    return result
+
+
 os.chdir(doc_path)
 copyfile("../" + read_me_file, read_me_file)
 
 # 为README.md生成目录；生成左侧sidebar(summary.md)
 g_f = codecs.open(gen_file_name, 'w', encoding='utf-8')
 r_f = codecs.open(read_me_file, 'a', encoding='utf-8')
+
+r_f.write("\n## 标签\n")
+tags = read_tag()
+for tag in tags:
+    r_f.write(f"\n### {tag}\n")
+    for file in tags[tag]:
+        r_f.write("- [" + file[1] + "](" + file[0] + ")\n")
+
 r_f.write("\n## 目录\n")
 print_file(".", 0, g_f, r_f)
 g_f.close()
