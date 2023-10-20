@@ -79,7 +79,7 @@ tags = read_tag()
 for tag in tags:
     r_f.write(f"\n### {tag}\n")
     for file in tags[tag]:
-        r_f.write("- [" + file[1] + "](" + file[0] + ")\n")
+        r_f.write("- [" + file[1] + "](" + quote(file[0]) + ")\n")
 
 r_f.write("\n## 目录\n")
 print_file(".", 0, g_f, r_f)
