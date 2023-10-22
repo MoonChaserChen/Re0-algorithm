@@ -1,26 +1,19 @@
-class UnionFind:
-    def __init__(self, n: int):
-        self.roots = [i for i in range(n)]
-        # root值为当前树的节点数；非root值为1(其实没有意义)
-        self.sizes = [1] * n
+from typing import List
 
-    def find(self, x: int) -> int:
-        if self.roots[x] == x:
-            return x
-        else:
-            self.roots[x] = self.find(self.roots[x])
-            return self.roots[x]
 
-    def union(self, x: int, y: int):
-        rx = self.find(x)
-        ry = self.find(y)
-        if rx != ry:
-            if self.sizes[rx] > self.sizes[ry]:
-                self.roots[ry] = rx
-                self.sizes[rx] += self.sizes[ry]
-            else:
-                self.roots[rx] = ry
-                self.sizes[ry] += self.sizes[rx]
-
-    def getSize(self, x: int) -> int:
-        return self.sizes[x]
+class Solution:
+    def minimumSum(self, nums: List[int]) -> int:
+        n = len(nums)
+        # pre[i]表示左侧最小值
+        pre, suf = nums.copy(), nums.copy()
+        for i in range(1, n):
+            pre[i] = min(pre[i], pre[i - 1])
+        for i in reversed(range(n - 1)):
+            suf[i] = min(suf[i], suf[i + 1])
+        ans = -1
+        for i in range(1, n - 1):
+            if pre[i - 1] < nums[i] and suf[i + 1] < nums[i]:
+                pans = nums[i] + pre[i - 1] + suf[i + 1]
+                if ans == -1 or ans > pans:
+                    ans = pans
+        return ans
