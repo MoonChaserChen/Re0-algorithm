@@ -1,23 +1,22 @@
-def permute(nums):
-    n = len(nums)
-    res = []
+def letter_combinations(digits):
+    m = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno",
+         "7": "pqrs", "8": "tuv", "9": "wxyz"}
+    result, curr_result = [], []
+    if not digits:
+        return []
 
-    def back_tracing(curr_idx):
-        if curr_idx == n - 1:
-            res.append(nums[:])
-            return
-        chosen_num = []
-        # 同层去重
-        for i in range(curr_idx, n):
-            if nums[i] in chosen_num:
-                continue
-            chosen_num.append(nums[i])
-            nums[curr_idx], nums[i] = nums[i], nums[curr_idx]
-            back_tracing(curr_idx + 1)
-            nums[curr_idx], nums[i] = nums[i], nums[curr_idx]
+    def back_tracing(curr_idx=0):
+        for candidate in m.get(digits[curr_idx]):
+            curr_result.append(candidate)
+            if curr_idx == len(digits) - 1:
+                result.append("".join(curr_result))
+            else:
+                back_tracing(curr_idx + 1)
+            curr_result.pop()
 
-    back_tracing(0)
-    return res
+    back_tracing()
+    return result
 
 
-print(permute([1, 1, 3]))
+print(letter_combinations("23"))
+print(letter_combinations("2"))
