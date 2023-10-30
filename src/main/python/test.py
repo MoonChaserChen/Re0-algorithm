@@ -1,22 +1,20 @@
-def letter_combinations(digits):
-    m = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno",
-         "7": "pqrs", "8": "tuv", "9": "wxyz"}
-    result, curr_result = [], []
-    if not digits:
-        return []
+from typing import List
 
-    def back_tracing(curr_idx=0):
-        for candidate in m.get(digits[curr_idx]):
-            curr_result.append(candidate)
-            if curr_idx == len(digits) - 1:
-                result.append("".join(curr_result))
+
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        # 答案在 [lo, hi] 中
+        lo, hi = 0, len(citations)
+        while lo < hi:
+            # lo 可能不增加，因此mid偏向于hi
+            mid = (lo + hi + 1) // 2
+            if citations[-mid] >= mid:
+                # lo 可能也是答案
+                lo = mid
             else:
-                back_tracing(curr_idx + 1)
-            curr_result.pop()
-
-    back_tracing()
-    return result
+                hi = mid - 1
+        return lo
 
 
-print(letter_combinations("23"))
-print(letter_combinations("2"))
+print(Solution().hIndex([0, 1, 3, 5, 6]))
+print(Solution().hIndex([1, 2, 100]))
