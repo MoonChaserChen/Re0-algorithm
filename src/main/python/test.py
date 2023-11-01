@@ -2,19 +2,34 @@ from typing import List
 
 
 class Solution:
-    def hIndex(self, citations: List[int]) -> int:
-        # 答案在 [lo, hi] 中
-        lo, hi = 0, len(citations)
-        while lo < hi:
-            # lo 可能不增加，因此mid偏向于hi
-            mid = (lo + hi + 1) // 2
-            if citations[-mid] >= mid:
-                # lo 可能也是答案
-                lo = mid
-            else:
-                hi = mid - 1
-        return lo
+    def smallestMissingValueSubtree(self, parents: List[int], nums: List[int]) -> List[int]:
+        # 树的构建
+        n = len(parents)
+        children = [[] for _ in range(n)]
+        for i in range(1, n):
+            children[parents[i]].append(i)
+
+        geneSet = set()  # 基因库
+        visited = [False] * n  # 节点访问标记
+
+        def dfs(_node):
+            if visited[_node]:
+                return
+            visited[_node] = True
+            geneSet.add(nums[_node])
+            for child in children[_node]:
+                dfs(child)
+
+        node = nums.index(1) if 1 in nums else -1
+        res, iNode = [1] * n, 1
+
+        while node != -1:
+            dfs(node)
+            while iNode in geneSet:
+                iNode += 1
+            res[node], node = iNode, parents[node]
+        return res
 
 
-print(Solution().hIndex([0, 1, 3, 5, 6]))
-print(Solution().hIndex([1, 2, 100]))
+s = Solution()
+print(s.smallestMissingValueSubtree([-1, 0, 1, 0, 3, 3], [5, 4, 6, 2, 1, 3]))
